@@ -21,6 +21,7 @@ For further questions, please contact <strong><i>Sihan Ma</i></strong> at [sima7
   <a href="#p3m-net-and-variants">P3M-Net</a> |
   <a href="#p3m-cp">P3M-CP</a> |
   <a href="#results">Results</a> |
+  <a href="#quick-start---train">Train</a> |
   <a href="#inference-code---how-to-test-on-your-images">Inference code</a> |
   <a href="#statement">Statement</a>
 </p>
@@ -30,11 +31,13 @@ For further questions, please contact <strong><i>Sihan Ma</i></strong> at [sima7
 ***
 ><h3><strong><i>:postbox: News</i></strong></h3>
 >
-> [2023-11-05]: Publish the ViTAE-S and SWIN-T backbone models pretrained on ImageNet ([Google Drive](https://drive.google.com/drive/folders/1sBRVgvFNtkZql1_ti_CxCgZs2O8U4RmW?usp=sharing) | [Baidu Wangpan](https://pan.baidu.com/s/1pVfUWAs-DcwTbWcUVGrfRw) (pw: wqac)) that can be used to train our P3M-Net from scratch.
+> [2024-3-31]: [Code for training](./core/README.md) is available!
+>
+> [2023-11-05]: Publish the ViTAE-S and SWIN-T backbone models pretrained on ImageNet that can be used to train our P3M-Net from scratch.
 >
 > [2023-03-28]: The paper has been accepted by the International Journal of Computer Vision ([IJCV](https://www.springer.com/journal/11263))! 🎉
 >
-> [2022-03-31]: Publish the <a href="#inference-code---how-to-test-on-your-images">inference code</a> and the pretrained model ([Google Drive](https://drive.google.com/file/d/1QbSjPA_Mxs7rITp_a9OJiPeFRDwxemqK/view?usp=sharing) | [Baidu Wangpan](https://pan.baidu.com/s/19FuiR1RwamqvxfhdXDL1fg) (pw: hxxy)) that can be used to test with our SOTA model <strong>P3M-Net(ViTAE-S)</strong> on your own privacy-preserving or normal portrait images.
+> [2022-03-31]: Publish the <a href="#inference-code---how-to-test-on-your-images">inference code</a> and the pretrained model that can be used to test with our SOTA model <strong>P3M-Net(ViTAE-S)</strong> on your own privacy-preserving or normal portrait images.
 > 
 > [2021-12-06]: Publish the [<strong>P3M-10k</strong>](#ppt-setting-and-p3m-10k-dataset) dataset.
 >
@@ -68,10 +71,16 @@ For further questions, please contact <strong><i>Sihan Ma</i></strong> at [sima7
 
 P3M-10k and the facemask are now <strong>published</strong>!! You can get access to it from the following links, please make sure that you have read and agreed to the agreement. Note that the facemask is not used in our work. So it's optional to download it.
 
-| Dataset | <p>Dataset Link<br>(Google Drive)</p> | <p>Dataset Link<br>(Baidu Wangpan 百度网盘)</p> | Dataset Release Agreement|
+<!-- | Dataset | <p>Dataset Link<br>(Google Drive)</p> | <p>Dataset Link<br>(Baidu Wangpan 百度网盘)</p> | Dataset Release Agreement|
 | :----:| :----: | :----: | :----: | 
 |<strong>P3M-10k</strong>|[Link](https://drive.google.com/uc?export=download&id=1LqUU7BZeiq8I3i5KxApdOJ2haXm-cEv1)|[Link](https://pan.baidu.com/s/1X9OdopT41lK0pKWyj0qSEA) (pw: fgmc)|[Agreement (MIT License)](https://jizhizili.github.io/files/p3m_dataset_agreement/P3M-10k_Dataset_Release_Agreement.pdf)| 
-|<strong>P3M-10k facemask</strong> (optional)|[Link](https://drive.google.com/file/d/1I-71PbkWcivBv3ly60V0zvtYRd3ddyYs/view?usp=sharing)|[Link](https://pan.baidu.com/s/1D9Kj_OIJbFTsqWfbMPzh_g) (pw: f772)|[Agreement (MIT License)](https://jizhizili.github.io/files/p3m_dataset_agreement/P3M-10k_Dataset_Release_Agreement.pdf)| 
+|<strong>P3M-10k facemask</strong> (optional)|[Link](https://drive.google.com/file/d/1I-71PbkWcivBv3ly60V0zvtYRd3ddyYs/view?usp=sharing)|[Link](https://pan.baidu.com/s/1D9Kj_OIJbFTsqWfbMPzh_g) (pw: f772)|[Agreement (MIT License)](https://jizhizili.github.io/files/p3m_dataset_agreement/P3M-10k_Dataset_Release_Agreement.pdf)|  -->
+
+| Dataset | <p>Dataset Link<br>(Google Drive)</p> | <p>Dataset Link<br>(Baidu Wangpan 百度网盘)</p> | Dataset Release Agreement|
+| :----:| :----: | :----: | :----: | 
+|<strong>P3M-10k</strong>|[Link](https://drive.google.com/file/d/1odzHp2zbQApLm90HH_Cvr5b5OwJVhEQG/view?usp=sharing)|[Link](https://pan.baidu.com/s/1aEmEXO5BflSp5hiA-erVBA?pwd=cied) (pw: cied) |[Agreement (MIT License)](https://jizhizili.github.io/files/p3m_dataset_agreement/P3M-10k_Dataset_Release_Agreement.pdf)| 
+
+
 
 ![](demo/p3m_dataset.png)
 
@@ -85,12 +94,12 @@ P3M-10k and the facemask are now <strong>published</strong>!! You can get access
 
 ![](demo/p3m-net-variants.png)
 
-<p align="justify">Here we provide the <strong>P3M-Net(ViTAE-S)</strong> model pretrained on P3M-10k, and the ViTAE-S and SWIN-T backbones pretrained on ImageNet.</p>
+<!-- <p align="justify">Here we provide the <strong>P3M-Net(ViTAE-S)</strong> model pretrained on P3M-10k, and the ViTAE-S and SWIN-T backbones pretrained on ImageNet.</p>
 
 | Model|  Google Drive | Baidu Wangpan(百度网盘) | 
 | :----: | :----:| :----: | 
 | P3M-Net(ViTAE-S)  | [Link](https://drive.google.com/file/d/1QbSjPA_Mxs7rITp_a9OJiPeFRDwxemqK/view?usp=sharing) | [Link](https://pan.baidu.com/s/19FuiR1RwamqvxfhdXDL1fg) (pw: hxxy) |
-| ViTAE-S, SWIN-T | [Link](https://drive.google.com/drive/folders/1sBRVgvFNtkZql1_ti_CxCgZs2O8U4RmW?usp=sharing) | [Link](https://pan.baidu.com/s/1pVfUWAs-DcwTbWcUVGrfRw) (pw: wqac) |
+| ViTAE-S, SWIN-T | [Link](https://drive.google.com/drive/folders/1sBRVgvFNtkZql1_ti_CxCgZs2O8U4RmW?usp=sharing) | [Link](https://pan.baidu.com/s/1pVfUWAs-DcwTbWcUVGrfRw) (pw: wqac) | -->
 
 
 ## P3M-CP
@@ -107,12 +116,15 @@ P3M-10k and the facemask are now <strong>published</strong>!! You can get access
 ![](demo/results1.png)
 ![](demo/results2.png)
 
+## Quick start - Train
+
+Please follow this [instruction page](./core/README.md).
 
 ## Inference Code - How to Test on Your Images
 
 <p align="justify">Here we provide the procedure of testing on sample images by our pretrained <strong>P3M-Net(ViTAE-S)</strong> model:</p>
 
-1. Setup environment following this [instruction page](https://github.com/ViTAE-Transformer/P3M-Net/tree/main/core);
+1. Setup environment following this [instruction page](./core/README.md);
 
 2. Insert the path `REPOSITORY_ROOT_PATH` in the file `core/config.py`;
 

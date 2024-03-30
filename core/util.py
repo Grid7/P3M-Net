@@ -12,13 +12,48 @@ import shutil
 import cv2
 import numpy as np
 import torch
+import torch.distributed as dist
 import glob
 import functools
 from torchvision import transforms
+from config import *
+
+
+def get_wandb_config(config):
+    wandb_args = {}
+    wandb_args['model'] = config.MODEL.TYPE
+    wandb_args['logname'] = config.TAG
+    return wandb_args
+
+def get_wandb_key(filename):
+    f = open(filename)
+    keys = f.readline().strip()
+    f.close()
+    return keys
 
 ##########################
 ### Pure functions
 ##########################
+
+def GET_RANK():
+    if dist.is_initialized():
+        return dist.get_rank()
+    else:
+        return 0
+
+def GET_WORLD_SIZE():
+    if dist.is_initialized():
+        return dist.get_world_size()
+    else:
+        1
+
+def is_main_process():
+    if not dist.is_initialized():
+        return True
+    if dist.is_initialized() and dist.get_rank() == 0:
+        return True
+    return False
+
 def extract_pure_name(original_name):
     pure_name, extention = os.path.splitext(original_name)
     return pure_name
@@ -118,6 +153,32 @@ def get_masked_local_from_global_test(global_result, local_result):
 #######################################
 ### Function to generate training data
 #######################################
+
+def generate_paths_for_dataset(dataset="P3M10K", trainset="TRAIN"):
+    ORI_PATH = DATASET_PATHS_DICT[dataset][trainset]['ORIGINAL_PATH']
+    MASK_PATH = DATASET_PATHS_DICT[dataset][trainset]['MASK_PATH']
+    FG_PATH = DATASET_PATHS_DICT[dataset][trainset]['FG_PATH']
+    BG_PATH = DATASET_PATHS_DICT[dataset][trainset]['BG_PATH']
+    FACEMASK_PATH = DATASET_PATHS_DICT[dataset][trainset]['PRIVACY_MASK_PATH']	
+    mask_list = listdir_nohidden(MASK_PATH)
+    total_number = len(mask_list)
+    paths_list = []
+    for mask_name in mask_list:
+        path_list = []
+        ori_path = ORI_PATH+extract_pure_name(mask_name)+'.jpg'
+        mask_path = MASK_PATH+mask_name
+        fg_path = FG_PATH+mask_name
+        bg_path = BG_PATH+extract_pure_name(mask_name)+'.jpg'
+        facemask_path = FACEMASK_PATH+mask_name
+        path_list.append(ori_path)	
+        path_list.append(mask_path)	
+        path_list.append(fg_path)
+        path_list.append(bg_path)
+        path_list.append(facemask_path)
+        paths_list.append(path_list)
+    return paths_list
+
+
 def get_valid_names(*dirs):
     # Extract valid names
     name_sets = [get_name_set(d) for d in dirs]

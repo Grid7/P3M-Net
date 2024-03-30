@@ -21,6 +21,7 @@ def build_model(model_arch, **kwargs):
     elif model_arch == "vitae":
         model = p3mnet_vitae_s(**kwargs)
     else:
+        print(model_arch)
         raise NotImplementedError
     
     return model

@@ -11,13 +11,44 @@ Paper link: https://arxiv.org/abs/2203.16828
 
 
 ########## Root paths and logging files paths
-REPOSITORY_ROOT_PATH = ''
-P3M_DATASET_ROOT_PATH = ''
+REPOSITORY_ROOT_PATH = 'p3m_out/'
+P3M_DATASET_ROOT_PATH = 'P3M-10k/'
 RWP_TEST_SET_ROOT_PATH = ''
 
+WANDB_KEY_FILE = '' # setup wandb key file path. Write your wandb key in a text file and set up the path for this file here.
+
+########## Paths for training
+TRAIN_LOGS_FOLDER = REPOSITORY_ROOT_PATH+'logs/train_logs/'
+TEST_LOGS_FOLDER = REPOSITORY_ROOT_PATH+'logs/test_logs/'
+WANDB_LOGS_FOLDER = REPOSITORY_ROOT_PATH+'logs/'
+CKPT_SAVE_FOLDER = REPOSITORY_ROOT_PATH+'models/trained/'
+DEBUG_FOLDER = REPOSITORY_ROOT_PATH+'debug/'
+TEST_RESULT_FOLDER = REPOSITORY_ROOT_PATH+'result/'
+
 ######### Paths of datasets
+VALID_TEST_DATASET_CHOICE = [
+    'P3M_500_P', 
+    'P3M_500_NP', 
+    'VAL500P', 
+    'VAL500NP', 
+    'VAL500P_NORMAL',
+    'VAL500P_MOSAIC',
+    'VAL500P_ZERO',
+    'RealWorldPortrait636']
+VALID_TEST_DATA_CHOICE = [*VALID_TEST_DATASET_CHOICE, 'SAMPLES']
+
 DATASET_PATHS_DICT={
 'P3M10K':{
+    'TRAIN':{
+        'ROOT_PATH':P3M_DATASET_ROOT_PATH+'train/',
+        'ORIGINAL_PATH':P3M_DATASET_ROOT_PATH+'train/facemask_blurred/',
+        'MASK_PATH':P3M_DATASET_ROOT_PATH+'train/mask/',
+        'FG_PATH':P3M_DATASET_ROOT_PATH+'train/fg_blurred/',
+        'BG_PATH':P3M_DATASET_ROOT_PATH+'train/bg/',
+        'PRIVACY_MASK_PATH': P3M_DATASET_ROOT_PATH+'train/facemask/',
+        'NORMAL_ORIGINAL_PATH': P3M_DATASET_ROOT_PATH+'train/original/',
+        'SAMPLE_NUMBER':9421
+        },
     'P3M_500_P':{
         'ROOT_PATH':P3M_DATASET_ROOT_PATH+'validation/P3M-500-P/',
         'ORIGINAL_PATH':P3M_DATASET_ROOT_PATH+'validation/P3M-500-P/blurred_image/',
@@ -54,9 +85,9 @@ SAMPLES_RESULT_ALPHA_PATH = REPOSITORY_ROOT_PATH+'samples/result_alpha/'
 SAMPLES_RESULT_COLOR_PATH = REPOSITORY_ROOT_PATH+'samples/result_color/'
 
 ######### Paths of pretrained model
-PRETRAINED_R34_MP = REPOSITORY_ROOT_PATH+'models/pretrained/'
-PRETRAINED_SWIN_STEM_POOLING5 = REPOSITORY_ROOT_PATH+'models/pretrained/'
-PRETRAINED_VITAE_NORC_MAXPOOLING_BIAS_BASIC_STAGE4_14 = REPOSITORY_ROOT_PATH+'models/'
+PRETRAINED_R34_MP = REPOSITORY_ROOT_PATH+'models/pretrained/r34mp_pretrained_imagenet.pth.tar'
+PRETRAINED_SWIN_STEM_POOLING5 = REPOSITORY_ROOT_PATH+'models/pretrained/swin_pretrained_epoch_299.pth'
+PRETRAINED_VITAE_NORC_MAXPOOLING_BIAS_BASIC_STAGE4_14 = REPOSITORY_ROOT_PATH+'models/pretrained/vitae_pretrained_ckpt.pth.tar'
 
 ######### Test config
 MAX_SIZE_H = 1600
